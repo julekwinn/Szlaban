@@ -1,13 +1,11 @@
 # Przewodnik Uruchomienia Systemu ESZP
 
-Cześć!
+Cześć Natalia!
 
 Oto instrukcja krok po kroku, jak uruchomić system Elektronicznego Szlabanu Zdalnie Programowalnego (ESZP) u siebie. System składa się z dwóch głównych części:
 
 1.  **API Centrala:** Serwer działający na Twoim **laptopie** (Windows/Linux/macOS), który zarządza użytkownikami, szlabanami, uprawnieniami i zbiera logi zdarzeń. Działa na porcie **5002**.
 2.  **System Szlabanu:** Aplikacja działająca na **Raspberry Pi (RPi)**, która bezpośrednio steruje fizycznym szlabanem (lub jego symulacją), odbiera sygnały radiowe i komunikuje się z API Centralą. Działa na porcie **5000**.
-
-Zakładam, że masz już pobrane oba foldery: `API_CENTRALA` i `SZLABAN`, zgodnie ze strukturą na obrazku.
 
 ---
 
@@ -18,7 +16,7 @@ Ta część będzie działać jako serwer zarządzający na porcie **5002**.
 **Krok 1: Przygotowanie środowiska**
 
 1.  Upewnij się, że masz zainstalowanego **Pythona 3** na swoim laptopie. Sprawdź wersję, wpisując `python --version` lub `python3 --version` w terminalu/konsoli.
-2.  Otwórz folder `API_CENTRALA` w terminalu (Wiersz Poleceń, PowerShell, terminal Linux/macOS) lub Eksploratorze Plików.
+2.  Otwórz folder `API_CENTRALA` w terminalu (Wiersz Poleceń, PowerShell) lub Eksploratorze Plików.
 
 **Krok 2: Instalacja i uruchomienie (za pomocą `start_centrala.bat`)**
 
@@ -103,9 +101,8 @@ Ta część będzie działać na RPi i sterować szlabanem, nasłuchując na por
 
 **Krok 1: Przygotowanie środowiska na RPi**
 
-1.  Upewnij się, że na RPi jest zainstalowany **Python 3** i masz dostęp do terminala (np. przez SSH).
-2.  Skopiuj cały folder `SZLABAN` na Raspberry Pi.
-3.  Otwórz terminal na RPi i przejdź do skopiowanego folderu `SZLABAN` (`cd /sciezka/do/SZLABAN`).
+1.  Skopiuj cały folder `SZLABAN` na Raspberry Pi.
+2.  Otwórz terminal na RPi i przejdź do skopiowanego folderu `SZLABAN` (`cd /sciezka/do/SZLABAN`).
 
 **Krok 2: Instalacja i uruchomienie (za pomocą `start.sh`)**
 
@@ -126,7 +123,7 @@ Masz plik `start.sh`, który ułatwia proces:
     - Zainstalować potrzebne biblioteki z `requirements.txt` (m.in. `Flask`, `requests`, `rich`, biblioteki do GPIO, radia, czujnika).
     - Uruchomić główny skrypt kontrolera (np. `python3 main.py`).
 
-4.  W konsoli RPi powinieneś/powinnaś zobaczyć logi startu systemu szlabanu i serwera API (Flask) nasłuchującego na porcie **5000**.
+4.  W konsoli RPi powinnaś zobaczyć logi startu systemu szlabanu i serwera API (Flask) nasłuchującego na porcie **5000**.
 
 **Krok 3: Konfiguracja Systemu Szlabanu**
 
@@ -142,7 +139,7 @@ Kluczowe ustawienia znajdują się w pliku `main.py` (wewnątrz klasy `AppConfig
   - **MUSISZ** zastąpić `192.168.1.101` **aktualnym adresem IP Twojego laptopa** w Twojej sieci lokalnej (sprawdź przez `ipconfig` / `ip addr`).
   - **Port `5002` jest teraz poprawny**, bo Centrala działa na tym porcie.
   - Jeśli zostawisz `None`, powiadomienia nie będą wysyłane.
-- `BARRIER_ID = "szlaban_juliuszka"`: **Unikalny identyfikator tego szlabanu.** Musi być taki sam, jak ten zarejestrowany w Centrali.
+- `BARRIER_ID = "szlaban_juliuszka"`: **Unikalny identyfikator tego szlabanu.** Musi być taki sam, jak ten zarejestrowany w Centrali ale moze byc inny jesli w centrali zarejestrujesz inny hihi.
 
 **Jak działa System Szlabanu (w skrócie):**
 
