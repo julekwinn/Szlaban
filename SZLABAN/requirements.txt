@@ -1,0 +1,8 @@
+wheel
+Flask
+requests
+rich
+smbus2
+spidev
+rpi-gpio
+rpi-lgpio

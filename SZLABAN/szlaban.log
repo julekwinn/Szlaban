@@ -1,0 +1,41 @@
+2025-04-03 21:36:33,041 - szlaban - INFO - Zaladowano wszystkie wymagane komponenty
+2025-04-03 21:36:33,116 - szlaban - INFO - System szlabanu zainicjalizowany
+2025-04-03 21:36:33,118 - szlaban - INFO - Status szlabanu: Zamkniety, Tryb serwisowy: Nieaktywny
+2025-04-03 21:36:33,121 - szlaban - INFO - System szlabanu uruchomiony
+2025-04-03 21:36:33,154 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.1.106:8080
+2025-04-03 21:36:33,155 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-03 21:37:33,122 - szlaban - INFO - Status szlabanu: Zamkniety, Tryb serwisowy: Nieaktywny
+2025-04-03 21:38:33,123 - szlaban - INFO - Status szlabanu: Zamkniety, Tryb serwisowy: Nieaktywny
+2025-04-03 21:38:38,155 - szlaban - INFO - Otrzymano sygnal systemowy, zamykanie...
+2025-04-03 21:38:38,260 - szlaban - CRITICAL - Krytyczny blad systemu: Please set pin numbering mode using GPIO.setmode(GPIO.BOARD) or GPIO.setmode(GPIO.BCM)
+2025-04-03 21:38:42,996 - szlaban - INFO - Zaladowano wszystkie wymagane komponenty
+2025-04-03 21:38:43,071 - szlaban - INFO - System szlabanu zainicjalizowany
+2025-04-03 21:38:43,073 - szlaban - INFO - Status szlabanu: Zamkniety, Tryb serwisowy: Nieaktywny
+2025-04-03 21:38:43,075 - szlaban - INFO - System szlabanu uruchomiony
+2025-04-03 21:38:43,109 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.1.106:8080
+2025-04-03 21:38:43,110 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-03 21:39:43,075 - szlaban - INFO - Status szlabanu: Zamkniety, Tryb serwisowy: Nieaktywny
+2025-04-03 21:39:51,645 - szlaban - INFO - Zaraportowano zdarzenie: OTWORZONO dla szlabanu SZ001
+2025-04-03 21:39:51,650 - szlaban - INFO - Zaplanowano automatyczne zamkniecie za 30 sekund
+2025-04-03 21:39:51,656 - werkzeug - INFO - 192.168.1.101 - - [03/Apr/2025 21:39:51] "POST /api/barrier/open HTTP/1.1" 200 -
+2025-04-03 21:40:21,650 - szlaban - INFO - Proba automatycznego zamkniecia szlabanu
+2025-04-03 21:47:42,464 - szlaban - INFO - Zaladowano klasy Barrier i Config z modulu szlaban
+2025-04-03 21:47:42,490 - szlaban - INFO - Zaladowano komponenty radiowe
+2025-04-03 21:47:42,564 - szlaban - INFO - System szlabanu zainicjalizowany
+2025-04-03 21:47:42,566 - szlaban - INFO - Status szlabanu: Zamkniety, Tryb serwisowy: Nieaktywny
+2025-04-03 21:47:42,569 - szlaban - INFO - System szlabanu uruchomiony
+2025-04-03 21:47:42,603 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.1.106:8080
+2025-04-03 21:47:42,603 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-03 21:47:56,534 - szlaban - INFO - Zaraportowano zdarzenie: OTWORZONO dla szlabanu SZ001
+2025-04-03 21:47:56,537 - szlaban - INFO - Zaplanowano automatyczne zamkniecie za 30 sekund
+2025-04-03 21:47:56,544 - werkzeug - INFO - 192.168.1.101 - - [03/Apr/2025 21:47:56] "POST /api/barrier/open HTTP/1.1" 200 -
+2025-04-03 21:48:26,537 - szlaban - INFO - Proba automatycznego zamkniecia szlabanu
