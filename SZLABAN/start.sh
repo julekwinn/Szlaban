@@ -63,23 +63,3 @@ else
 fi
 echo
 
-# --- 4. Run Controller Application ---
-MAIN_SCRIPT="main.py"
-echo "--- Step 4: Starting controller application ($MAIN_SCRIPT) ---"
-if [ ! -f "$MAIN_SCRIPT" ]; then
-    echo "CRITICAL ERROR: Main application file not found: $MAIN_SCRIPT in $(pwd)."
-    exit 1
-fi
-
-echo "Running: python3 $MAIN_SCRIPT"
-echo "(Press Ctrl+C to stop the application)"
-echo
-
-# Execute the main Python script
-python3 "$MAIN_SCRIPT"
-
-# --- End ---
-EXIT_CODE=$?
-echo
-echo "Barrier controller application stopped (exit code: $EXIT_CODE)."
-exit $EXIT_CODE
