@@ -29,9 +29,10 @@ class AppConfig:
     AUTO_CLOSE_DELAY = 10.0
     LOG_LEVEL = "INFO"
     # Adres URL endpointu centrali do wysyłania zdarzeń
-    CENTRAL_ENDPOINT_URL = 'http://192.168.1.101:5002/barrier/event' # URL lub None, jak jwst none to sie nie wysla wiadomosci do centrali po prostu
+    CENTRAL_ENDPOINT_URL = 'http://192.168.182.240:5002/barrier/event' # URL lub None, jak jwst none to sie nie wysla wiadomosci do centrali po prostu
+    CENTRAL_VERIFY_URL = 'http://192.168.182.240:5002/api/verify/remote' # URL lub None, jeśli None, weryfikacja nie działa
     # Unikalne ID tego szlabanu
-    BARRIER_ID = "szlaban_juliuszka"
+    BARRIER_ID = "testbarrier"
 
 # --- Inicjalizacja Logowania ---
 rich_traceback_install(show_locals=False)
@@ -205,26 +206,66 @@ def auto_close_task():
     except Exception as e:
         log.exception(f"Timer: Blad w watku auto-zamkniecia:")
 
-# --- Obsługa radia ---
-def handle_radio_data(data, rssi=None, index=None):
+def handle_radio_data(data: bytes, rssi=None, index=None):
+    """
+    Obsługuje dane odebrane z radia. Ignoruje je, jeśli szlaban jest
+    otwarty, w ruchu lub w trybie serwisowym. W przeciwnym razie
+    wysyła dane do weryfikacji w centrali za pomocą process_radio_data
+    i jeśli weryfikacja się powiedzie, inicjuje otwarcie szlabanu.
+    """
+    log.debug(f"[Radio]: Odebrano {len(data)} bajtów (RSSI: {rssi}, Index: {index}).")
+    # Logowanie surowych danych może być pomocne, ale można zakomentować po debugowaniu
+    # log.debug(f"[Radio]: Dane raw: {data!r}")
+
+    # --- ZMODYFIKOWANA SEKCJA SPRAWDZANIA STANU ---
     with state_lock:
-        if service_mode: return
-        if not barrier: return
-        if barrier.in_motion: return
-        if barrier.is_open: return
+        # Sprawdź wszystkie powody do zignorowania sygnału *przed* dalszym przetwarzaniem
+        ignore_reason = None
+        if service_mode:
+            ignore_reason = "Tryb serwisowy aktywny"
+        elif not barrier:
+            # Ten błąd nie powinien wystąpić po poprawnej inicjalizacji
+            log.error("[Radio]: Krytyczny błąd - Barrier object nie istnieje!")
+            ignore_reason = "Obiekt szlabanu niezainicjalizowany"
+        elif barrier.in_motion:
+            ignore_reason = "Szlaban w ruchu"
+        elif barrier.is_open: # <<<--- DODANY WARUNEK
+            ignore_reason = "Szlaban już otwarty"
 
-    processing_result = process_radio_data(data)
+        # Jeśli znaleziono powód do zignorowania, zaloguj i zakończ funkcję
+        if ignore_reason:
+            log.debug(f"[Radio]: Ignorowanie sygnału - {ignore_reason}.")
+            return # Natychmiastowe wyjście z funkcji handle_radio_data
+    # --- KONIEC ZMODYFIKOWANEJ SEKCJI ---
 
+    # Jeśli doszliśmy tutaj, oznacza to, że:
+    # - tryb serwisowy jest wyłączony
+    # - obiekt barrier istnieje
+    # - szlaban NIE jest w ruchu
+    # - szlaban NIE jest otwarty (jest zamknięty)
+    # Możemy przystąpić do weryfikacji sygnału.
+    log.debug("[Radio]: Stan szlabanu OK (zamknięty, nie w ruchu), przystępowanie do weryfikacji sygnału...")
+
+    # Wywołaj funkcję weryfikującą, przekazując dane i konfigurację
+    processing_result = process_radio_data(
+        raw_data=data,
+        verify_url=AppConfig.CENTRAL_VERIFY_URL,
+        barrier_id=AppConfig.BARRIER_ID
+    )
+
+    # Reaguj na wynik weryfikacji
     if processing_result.get('valid'):
-        user_id = processing_result.get('user_id')
-        if user_id:
-            log.info(f"[Radio]: Odebrano sygnał (RSSI: {rssi}), User: {user_id}. Otwieranie.")
-            open_thread = threading.Thread(target=execute_barrier_open, args=("radio", user_id), daemon=True)
-            open_thread.start()
-        else:
-            log.error("[Radio]: Valid signal processed, but User ID is missing in result!")
+        # Weryfikacja w centrali powiodła się
+        user_id = processing_result.get('user_id') # Otrzymamy tu 'verified_remote'
+        log.info(f"[Radio]: Sygnał zweryfikowany przez centralę (User: {user_id}, RSSI: {rssi}). Otwieranie.")
+
+        # Uruchom wątek otwierania szlabanu
+        open_thread = threading.Thread(target=execute_barrier_open, args=("radio", user_id), daemon=True)
+        open_thread.start()
     else:
-        log.debug(f"[Radio]: Invalid or empty signal received (RSSI: {rssi}).")
+        # Weryfikacja w centrali nie powiodła się (lub błąd komunikacji)
+        log.info(f"[Radio]: Sygnał odrzucony podczas weryfikacji w centrali (RSSI: {rssi}).")
+        # Nie rób nic więcej
 
 # --- Funkcja zamykania systemu ---
 def shutdown_system(signum=None, frame=None):
