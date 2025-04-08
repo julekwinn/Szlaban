@@ -1,0 +1,6 @@
+../Radio/gpio.c:27:6:GpioInit	24	static
+../Radio/gpio.c:42:6:GpioSetInterrupt	24	static
+../Radio/gpio.c:57:6:GpioRemoveInterrupt	16	static
+../Radio/gpio.c:72:6:GpioWrite	16	static
+../Radio/gpio.c:87:6:GpioToggle	16	static
+../Radio/gpio.c:102:10:GpioRead	16	static

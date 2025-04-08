@@ -1,0 +1,15 @@
+../Radio/timer.c:73:6:TimerInit	16	static
+../Radio/timer.c:82:6:TimerStart	24	static,ignoring_inline_asm
+../Radio/timer.c:130:13:TimerInsertTimer	32	static
+../Radio/timer.c:184:13:TimerInsertNewHeadTimer	24	static
+../Radio/timer.c:200:6:TimerIrqHandler	16	static
+../Radio/timer.c:242:6:TimerStop	32	static,ignoring_inline_asm
+../Radio/timer.c:329:13:TimerExists	24	static
+../Radio/timer.c:344:6:TimerReset	16	static
+../Radio/timer.c:350:6:TimerSetValue	16	static
+../Radio/timer.c:357:13:TimerGetValue	8	static
+../Radio/timer.c:362:13:TimerGetCurrentTime	8	static
+../Radio/timer.c:367:13:TimerGetElapsedTime	16	static
+../Radio/timer.c:372:13:TimerGetFutureTime	16	static
+../Radio/timer.c:377:13:TimerSetTimeout	16	static
+../Radio/timer.c:384:6:TimerLowPowerHandler	4	static

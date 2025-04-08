@@ -1,0 +1,5 @@
+../Radio/board.c:99:6:BoardInitPeriph	1
+../Radio/board.c:118:6:BoardInitMcu	3
+../Radio/board.c:154:6:BoardDeInitMcu	1
+../Radio/board.c:168:10:BoardGetRandomSeed	1
+../Radio/board.c:173:6:BoardGetUniqueId	1

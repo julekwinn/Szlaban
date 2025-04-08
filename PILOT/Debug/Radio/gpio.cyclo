@@ -1,0 +1,6 @@
+../Radio/gpio.c:27:6:GpioInit	2
+../Radio/gpio.c:42:6:GpioSetInterrupt	2
+../Radio/gpio.c:57:6:GpioRemoveInterrupt	1
+../Radio/gpio.c:72:6:GpioWrite	2
+../Radio/gpio.c:87:6:GpioToggle	2
+../Radio/gpio.c:102:10:GpioRead	2

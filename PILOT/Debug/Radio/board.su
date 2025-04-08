@@ -1,0 +1,5 @@
+../Radio/board.c:99:6:BoardInitPeriph	16	static
+../Radio/board.c:118:6:BoardInitMcu	16	static
+../Radio/board.c:154:6:BoardDeInitMcu	8	static
+../Radio/board.c:168:10:BoardGetRandomSeed	4	static
+../Radio/board.c:173:6:BoardGetUniqueId	16	static

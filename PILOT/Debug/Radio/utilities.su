@@ -1,0 +1,7 @@
+../Radio/utilities.c:30:9:rand1	4	static
+../Radio/utilities.c:35:6:srand1	16	static
+../Radio/utilities.c:41:9:randr	16	static
+../Radio/utilities.c:46:6:memcpy1	24	static
+../Radio/utilities.c:54:6:memcpyr	24	static
+../Radio/utilities.c:63:6:memset1	16	static
+../Radio/utilities.c:71:8:Nibble2HexChar	16	static

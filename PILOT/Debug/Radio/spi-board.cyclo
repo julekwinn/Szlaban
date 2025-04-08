@@ -1,0 +1,7 @@
+../Radio/spi-board.c:27:25:__ffs	2
+../Radio/spi-board.c:43:6:SpiInit	4
+../Radio/spi-board.c:98:6:SpiDeInit	1
+../Radio/spi-board.c:108:6:SpiFormat	3
+../Radio/spi-board.c:150:6:SpiFormatOLD	3
+../Radio/spi-board.c:178:6:SpiFrequency	2
+../Radio/spi-board.c:200:12:SpiGetFlag	2

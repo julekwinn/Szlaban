@@ -1,0 +1,9 @@
+../Radio/sx1276-board.c:59:6:SX1276IoInit	16	static
+../Radio/sx1276-board.c:71:6:SX1276IoIrqInit	16	static
+../Radio/sx1276-board.c:81:6:SX1276IoDeInit	16	static
+../Radio/sx1276-board.c:93:9:SX1276GetPaSelect	16	static
+../Radio/sx1276-board.c:98:6:SX1276SetAntSwLowPower	16	static
+../Radio/sx1276-board.c:115:6:SX1276AntSwInit	16	static
+../Radio/sx1276-board.c:121:6:SX1276AntSwDeInit	16	static
+../Radio/sx1276-board.c:127:6:SX1276SetAntSw	16	static
+../Radio/sx1276-board.c:141:6:SX1276CheckRfFrequency	16	static
