@@ -25,13 +25,14 @@ def get_db() -> sqlite3.Connection:
         log.exception(f"DB Connection Error: Failed to connect to {config.DATABASE_FILE}: {e}")
         raise # Rzuć wyjątek dalej, aby zatrzymać aplikację w razie problemów z DB
 
+
 def init_db():
     """Inicjalizuje schemat bazy danych, jeśli tabele nie istnieją."""
     log.info(f"DB Init: Checking schema in {config.DATABASE_FILE}...")
     try:
-        with get_db() as conn: # Używamy context manager
+        with get_db() as conn:
             cursor = conn.cursor()
-            # Włącz obsługę kluczy obcych (już w get_db, ale dla pewności)
+            # Włącz obsługę kluczy obcych
             cursor.execute("PRAGMA foreign_keys = ON;")
 
             # Tabele (kolejność ma znaczenie ze względu na klucze obce)
@@ -63,19 +64,36 @@ def init_db():
                     barrier_id TEXT NOT NULL,
                     event_type TEXT NOT NULL,
                     trigger_method TEXT NOT NULL,
-                    event_timestamp TEXT NOT NULL, -- Oryginalny czas zdarzenia
+                    event_timestamp TEXT NOT NULL,
                     user_id TEXT,
-                    success INTEGER NOT NULL, -- 0 or 1
+                    success INTEGER NOT NULL,
                     details TEXT,
                     failed_action TEXT,
-                    received_at TEXT NOT NULL -- Czas odebrania przez centralę
+                    received_at TEXT NOT NULL
+                )""")
+
+            # Dodaj nową tabelę dla pilotów (REMOTES) z licznikiem
+            cursor.execute(f"""
+                CREATE TABLE IF NOT EXISTS {config.TABLE_REMOTES} (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT NOT NULL,
+                    user_id INTEGER NOT NULL,
+                    barrier_id TEXT NOT NULL,
+                    remote_id TEXT NOT NULL UNIQUE,
+                    aes_key TEXT NOT NULL,
+                    hmac_key TEXT NOT NULL,
+                    iv TEXT NOT NULL,
+                    last_counter INTEGER NOT NULL DEFAULT 0,
+                    created_at TEXT NOT NULL,
+                    FOREIGN KEY (user_id) REFERENCES {config.TABLE_USERS} (id) ON DELETE CASCADE,
+                    FOREIGN KEY (barrier_id) REFERENCES {config.TABLE_BARRIERS} (barrier_id) ON DELETE CASCADE
                 )""")
 
             conn.commit()
             log.info("DB Init: Schema verified/created successfully.")
     except sqlite3.Error as e:
         log.exception(f"DB Init Error: Failed to initialize database schema: {e}")
-        raise # Zatrzymujemy aplikację, jeśli baza nie działa poprawnie przy starcie
+        raise  # Zatrzymujemy aplikację, jeśli baza nie działa poprawnie przy starcie
 
 # --- Funkcje Dostępu do Danych (CRUD i inne) ---
 
@@ -293,3 +311,211 @@ def get_events_from_db(barrier_ids: Optional[List[str]] = None, limit: int = con
     except sqlite3.Error as e:
         log.error(f"DB Read Events Error: Failed fetching events. Filter: barrier_ids={barrier_ids}, only_failures={only_failures}. Error: {e}")
         return None # Zwróć None w przypadku błędu odczytu z bazy
+
+
+# --- Funkcje dla pilotów ---
+import random
+import secrets
+import hashlib
+from datetime import datetime
+from typing import Optional, Dict, List, Tuple
+
+
+# Funkcja create_db_remote (aktualizacja)
+def create_db_remote(name: str, user_id: int, barrier_id: str) -> Optional[Tuple[int, Dict]]:
+    """
+    Tworzy nowy pilot w bazie danych.
+    Zwraca krotkę (id, dane_pilota) lub None w przypadku błędu.
+    """
+    # Generowanie unikalnych kluczy i identyfikatora
+    remote_id = secrets.token_hex(8)  # 8 bajtów = 16 znaków hex
+    aes_key = secrets.token_hex(16)  # 16 bajtów = 32 znaki hex (128-bit)
+    hmac_key = secrets.token_hex(32)  # 32 bajty = 64 znaki hex (256-bit)
+    iv = secrets.token_hex(16)  # 16 bajtów = 32 znaki hex (128-bit)
+    created_at = datetime.now().isoformat()
+
+    # Sprawdzenie czy użytkownik i szlaban istnieją
+    with get_db() as conn:
+        cursor = conn.cursor()
+        cursor.execute(f"SELECT 1 FROM {config.TABLE_USERS} WHERE id = ?", (user_id,))
+        if not cursor.fetchone():
+            log.error(f"DB Remote Create Error: User with ID {user_id} not found.")
+            return None
+
+        cursor.execute(f"SELECT 1 FROM {config.TABLE_BARRIERS} WHERE barrier_id = ?", (barrier_id,))
+        if not cursor.fetchone():
+            log.error(f"DB Remote Create Error: Barrier with ID '{barrier_id}' not found.")
+            return None
+
+        # Sprawdzamy uprawnienia użytkownika do szlabanu
+        cursor.execute(f"SELECT permission_level FROM {config.TABLE_PERMISSIONS} WHERE user_id = ? AND barrier_id = ?",
+                       (user_id, barrier_id))
+        permission = cursor.fetchone()
+        if not permission:
+            log.error(f"DB Remote Create Error: User {user_id} has no permission for barrier '{barrier_id}'.")
+            return None
+
+    sql = f"""INSERT INTO {config.TABLE_REMOTES} 
+              (name, user_id, barrier_id, remote_id, aes_key, hmac_key, iv, last_counter, created_at) 
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"""
+
+    try:
+        with get_db() as conn:
+            cursor = conn.cursor()
+            cursor.execute(sql, (name, user_id, barrier_id, remote_id, aes_key, hmac_key, iv, 0, created_at))
+            db_id = cursor.lastrowid
+            conn.commit()
+
+        log.info(f"Remote '{name}' for user {user_id} and barrier '{barrier_id}' created with ID: {db_id}.")
+
+        # Przygotuj dane do zwrotu
+        remote_data = {
+            "id": db_id,
+            "name": name,
+            "user_id": user_id,
+            "barrier_id": barrier_id,
+            "remote_id": remote_id,
+            "aes_key": aes_key,
+            "hmac_key": hmac_key,
+            "iv": iv,
+            "last_counter": 0,
+            "created_at": created_at
+        }
+
+        return db_id, remote_data
+    except sqlite3.IntegrityError as e:
+        log.warning(f"DB Remote Create Error: Integrity error. Error: {e}")
+        return None
+    except sqlite3.Error as e:
+        log.error(f"DB Remote Create Error: Failed creating remote for user {user_id}. Error: {e}")
+        return None
+
+
+# Funkcja aktualizująca licznik pilota
+def update_remote_counter(remote_id: str, new_counter: int) -> bool:
+    """Aktualizuje licznik pilota w bazie danych."""
+    sql = f"UPDATE {config.TABLE_REMOTES} SET last_counter = ? WHERE remote_id = ?"
+    try:
+        with get_db() as conn:
+            cursor = conn.cursor()
+            cursor.execute(sql, (new_counter, remote_id))
+            updated = cursor.rowcount > 0
+            conn.commit()
+
+        if updated:
+            log.debug(f"Updated counter for remote '{remote_id}' to {new_counter}.")
+        else:
+            log.warning(f"Remote '{remote_id}' not found when updating counter.")
+
+        return updated
+    except sqlite3.Error as e:
+        log.error(f"DB Counter Update Error: Failed updating counter for remote '{remote_id}'. Error: {e}")
+        return False
+
+
+# Funkcja sprawdzająca dostęp pilota z weryfikacją licznika
+def verify_remote_with_counter(remote_id: str, barrier_id: str, encrypted_hex: str) -> Tuple[bool, Optional[str]]:
+    """
+    Weryfikuje pilot z uwzględnieniem licznika.
+    Sprawdza czy pilot ma dostęp do szlabanu oraz czy licznik jest poprawny.
+    Zwraca krotkę (dostęp_przyznany, powód_odmowy)
+    """
+    try:
+        # Pobierz dane pilota
+        remote = get_remote_by_id(remote_id)
+        if not remote:
+            return False, "remote_not_found"
+
+        # Sprawdź czy pilot ma dostęp do tego szlabanu
+        if remote['barrier_id'] != barrier_id:
+            return False, "invalid_barrier"
+
+        # Sprawdź czy użytkownik nadal ma uprawnienia do szlabanu
+        user_id = remote['user_id']
+        permission = get_db_permission_level(user_id, barrier_id)
+        if not permission:
+            return False, "permission_revoked"
+
+        # Weryfikacja kryptograficzna
+        try:
+            import crypto_utils
+
+            # Weryfikuj wiadomość kryptograficznie i pobierz licznik
+            valid, counter, error_msg = crypto_utils.verify_remote_message(
+                encrypted_hex,
+                remote
+            )
+
+            if not valid:
+                return False, error_msg or "cryptographic_verification_failed"
+
+            # Sprawdź czy licznik jest większy od ostatniego
+            if counter <= remote['last_counter']:
+                return False, "invalid_counter"
+
+            # Aktualizuj licznik
+            update_remote_counter(remote_id, counter)
+
+            # Wszystko OK
+            return True, None
+
+        except ImportError:
+            log.error("Crypto module not available, cannot verify remote message")
+            return False, "crypto_module_missing"
+
+    except Exception as e:
+        log.error(f"Remote Verify Error: Failed verifying remote '{remote_id}'. Error: {e}")
+        return False, "server_error"
+
+
+def get_remote_by_id(remote_id: str) -> Optional[Dict]:
+    """Pobiera dane pilota na podstawie jego identyfikatora."""
+    sql = f"SELECT * FROM {config.TABLE_REMOTES} WHERE remote_id = ?"
+    try:
+        with get_db() as conn:
+            cursor = conn.cursor()
+            cursor.execute(sql, (remote_id,))
+            remote = cursor.fetchone()
+
+        if remote:
+            return dict(remote)
+        return None
+    except sqlite3.Error as e:
+        log.error(f"DB Get Remote Error: Failed fetching remote '{remote_id}'. Error: {e}")
+        return None
+
+
+def get_user_remotes(user_id: int) -> List[Dict]:
+    """Pobiera listę pilotów przypisanych do użytkownika."""
+    sql = f"SELECT * FROM {config.TABLE_REMOTES} WHERE user_id = ?"
+    try:
+        with get_db() as conn:
+            cursor = conn.cursor()
+            cursor.execute(sql, (user_id,))
+            remotes = cursor.fetchall()
+
+        return [dict(remote) for remote in remotes]
+    except sqlite3.Error as e:
+        log.error(f"DB Get User Remotes Error: Failed fetching remotes for user {user_id}. Error: {e}")
+        return []
+
+
+def delete_remote(remote_id: str) -> bool:
+    """Usuwa pilot z bazy danych."""
+    sql = f"DELETE FROM {config.TABLE_REMOTES} WHERE remote_id = ?"
+    try:
+        with get_db() as conn:
+            cursor = conn.cursor()
+            cursor.execute(sql, (remote_id,))
+            deleted = cursor.rowcount > 0
+            conn.commit()
+
+        if deleted:
+            log.info(f"Remote '{remote_id}' deleted successfully.")
+        else:
+            log.warning(f"DB Remote Delete: Remote '{remote_id}' not found.")
+
+        return deleted
+    except sqlite3.Error as e:
+        log.error(f"DB Remote Delete Error: Failed deleting remote '{remote_id}'. Error: {e}")
+        return False
