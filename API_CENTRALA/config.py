@@ -10,7 +10,7 @@ TABLE_PERMISSIONS = "user_barrier_permissions"
 TABLE_REMOTES = "remotes"  # Nowa tabela dla pilotów
 
 # --- Konfiguracja Logowania ---
-LOG_LEVEL = logging.INFO
+LOG_LEVEL = "DEBUG"
 
 # --- Konfiguracja Bezpieczeństwa ---
 ADMIN_API_KEY = "ultra-tajny-admin-token-eszp-123" # Pamiętaj, aby zmienić to w środowisku produkcyjnym!

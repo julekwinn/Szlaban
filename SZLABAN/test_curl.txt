@@ -1,0 +1,12 @@
+curl -X POST \
+     -H "Content-Type: application/json" \
+     -d '{
+         "barrier_id": "testbarrier",
+         "event_type": "manual_test_event",
+         "trigger_method": "curl",
+         "timestamp": "2025-04-08T22:23:00",
+         "user_id": "curl_tester",
+         "success": true,
+         "details": "To jest testowe zdarzenie wysłane za pomocą curl."
+     }' \
+     http://192.168.182.240:5002/barrier/event

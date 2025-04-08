@@ -7,6 +7,7 @@ import signal
 import threading
 import logging
 import requests
+import json 
 from datetime import datetime
 from flask import Flask, jsonify, request
 from rich.logging import RichHandler
@@ -60,18 +61,35 @@ werkzeug_logger.setLevel(logging.ERROR) # Zmniejsz gadatliwość logów Flask/We
 # --- Funkcje powiadomień ---
 def send_notification_async(payload):
     """Wysyła powiadomienie do centrali w osobnym wątku."""
-    if not AppConfig.CENTRAL_ENDPOINT_URL:
+    target_url = AppConfig.CENTRAL_ENDPOINT_URL
+    if not target_url:
+        # Logujemy tylko raz w send_notification, że wysyłanie jest wyłączone
         return
-    log.debug(f"Wysyłanie powiadomienia do {AppConfig.CENTRAL_ENDPOINT_URL}: {payload}")
-    try:
-        response = requests.post(AppConfig.CENTRAL_ENDPOINT_URL, json=payload, timeout=10)
-        response.raise_for_status()
-        log.info(f"Powiadomienie wysłane pomyślnie (status: {response.status_code}).")
-    except requests.exceptions.RequestException as e:
-        log.error(f"Błąd wysyłania powiadomienia do centrali: {e}")
-    except Exception as e:
-        log.exception("Niespodziewany błąd podczas wysyłania powiadomienia:")
 
+    # Logowanie DOKŁADNIE przed wysłaniem
+    # Używamy json.dumps dla ładniejszego formatowania payloadu w logach
+    payload_str = json.dumps(payload, indent=2, ensure_ascii=False)
+    log.debug(f"Wątek powiadomienia: Próba wysłania do [bold blue]{target_url}[/]:\n{payload_str}")
+
+    try:
+        response = requests.post(target_url, json=payload, timeout=10)
+        response.raise_for_status() # Rzuci wyjątkiem dla statusów 4xx/5xx
+        log.info(f"Powiadomienie wysłane pomyślnie do [bold blue]{target_url}[/] (Status: {response.status_code}). Typ: {payload.get('event_type', 'N/A')}")
+    except requests.exceptions.Timeout:
+         log.error(f"Błąd wysyłania powiadomienia do [bold red]{target_url}[/]: Timeout (po 10s).")
+    except requests.exceptions.ConnectionError:
+         log.error(f"Błąd wysyłania powiadomienia do [bold red]{target_url}[/]: Błąd połączenia (sprawdź adres IP/dostępność sieci).")
+    except requests.exceptions.HTTPError as e:
+         # Błąd odpowiedzi HTTP (np. 404 Not Found, 500 Internal Server Error)
+         log.error(f"Błąd wysyłania powiadomienia do [bold red]{target_url}[/]: Błąd HTTP {e.response.status_code}. Odpowiedź: {e.response.text[:200]}") # Pokaż początek odpowiedzi błędu
+    except requests.exceptions.RequestException as e:
+         # Inne błędy związane z żądaniem
+         log.error(f"Błąd wysyłania powiadomienia do [bold red]{target_url}[/]: Błąd żądania: {e}")
+    except Exception as e:
+         # Niespodziewane błędy
+         log.exception(f"Niespodziewany błąd podczas wysyłania powiadomienia do {target_url}:")
+
+# ZMODYFIKOWANA FUNKCJA
 def send_notification(event_type: str, trigger_method: str, user_id: str = None, success: bool = True, details: str = None):
     """Przygotowuje payload i uruchamia wysyłkę w osobnym wątku."""
     timestamp = datetime.now().isoformat()
@@ -91,9 +109,17 @@ def send_notification(event_type: str, trigger_method: str, user_id: str = None,
         if event_type == "barrier_closed": failed_action = "close"
         payload["failed_action"] = failed_action
 
-    log.info(f"Zdarzenie: {payload['event_type']}, Trigger: {trigger_method}, User: {payload['user_id']}, Success: {success}")
-    notification_thread = threading.Thread(target=send_notification_async, args=(payload,), daemon=True)
-    notification_thread.start()
+    # Logowanie ZANIM wątek zostanie uruchomiony
+    log.info(f"Przygotowano zdarzenie: Typ='{payload['event_type']}', Trigger='{trigger_method}', User='{payload['user_id']}', Success={success}")
+
+    target_url = AppConfig.CENTRAL_ENDPOINT_URL
+    if target_url:
+        log.debug(f"Uruchamianie wysyłki powiadomienia do: [bold blue]{target_url}[/]")
+        notification_thread = threading.Thread(target=send_notification_async, args=(payload,), daemon=True)
+        notification_thread.start()
+    else:
+        log.warning("Wysyłanie powiadomień do centrali jest WYŁĄCZONE (CENTRAL_ENDPOINT_URL jest None).")
+
 
 # --- Funkcje operacji szlabanu ---
 def execute_barrier_open(trigger_method: str, user_id: str = None):
@@ -206,6 +232,7 @@ def auto_close_task():
     except Exception as e:
         log.exception(f"Timer: Blad w watku auto-zamkniecia:")
 
+# --- Obsługa radia ---
 def handle_radio_data(data: bytes, rssi=None, index=None):
     """
     Obsługuje dane odebrane z radia. Ignoruje je, jeśli szlaban jest
@@ -214,58 +241,36 @@ def handle_radio_data(data: bytes, rssi=None, index=None):
     i jeśli weryfikacja się powiedzie, inicjuje otwarcie szlabanu.
     """
     log.debug(f"[Radio]: Odebrano {len(data)} bajtów (RSSI: {rssi}, Index: {index}).")
-    # Logowanie surowych danych może być pomocne, ale można zakomentować po debugowaniu
-    # log.debug(f"[Radio]: Dane raw: {data!r}")
-
-    # --- ZMODYFIKOWANA SEKCJA SPRAWDZANIA STANU ---
     with state_lock:
-        # Sprawdź wszystkie powody do zignorowania sygnału *przed* dalszym przetwarzaniem
         ignore_reason = None
         if service_mode:
             ignore_reason = "Tryb serwisowy aktywny"
         elif not barrier:
-            # Ten błąd nie powinien wystąpić po poprawnej inicjalizacji
             log.error("[Radio]: Krytyczny błąd - Barrier object nie istnieje!")
             ignore_reason = "Obiekt szlabanu niezainicjalizowany"
         elif barrier.in_motion:
             ignore_reason = "Szlaban w ruchu"
-        elif barrier.is_open: # <<<--- DODANY WARUNEK
+        elif barrier.is_open:
             ignore_reason = "Szlaban już otwarty"
 
-        # Jeśli znaleziono powód do zignorowania, zaloguj i zakończ funkcję
         if ignore_reason:
             log.debug(f"[Radio]: Ignorowanie sygnału - {ignore_reason}.")
-            return # Natychmiastowe wyjście z funkcji handle_radio_data
-    # --- KONIEC ZMODYFIKOWANEJ SEKCJI ---
-
-    # Jeśli doszliśmy tutaj, oznacza to, że:
-    # - tryb serwisowy jest wyłączony
-    # - obiekt barrier istnieje
-    # - szlaban NIE jest w ruchu
-    # - szlaban NIE jest otwarty (jest zamknięty)
-    # Możemy przystąpić do weryfikacji sygnału.
+            return
     log.debug("[Radio]: Stan szlabanu OK (zamknięty, nie w ruchu), przystępowanie do weryfikacji sygnału...")
 
-    # Wywołaj funkcję weryfikującą, przekazując dane i konfigurację
     processing_result = process_radio_data(
         raw_data=data,
         verify_url=AppConfig.CENTRAL_VERIFY_URL,
         barrier_id=AppConfig.BARRIER_ID
     )
 
-    # Reaguj na wynik weryfikacji
     if processing_result.get('valid'):
-        # Weryfikacja w centrali powiodła się
-        user_id = processing_result.get('user_id') # Otrzymamy tu 'verified_remote'
+        user_id = processing_result.get('user_id') # 'verified_remote'
         log.info(f"[Radio]: Sygnał zweryfikowany przez centralę (User: {user_id}, RSSI: {rssi}). Otwieranie.")
-
-        # Uruchom wątek otwierania szlabanu
         open_thread = threading.Thread(target=execute_barrier_open, args=("radio", user_id), daemon=True)
         open_thread.start()
     else:
-        # Weryfikacja w centrali nie powiodła się (lub błąd komunikacji)
         log.info(f"[Radio]: Sygnał odrzucony podczas weryfikacji w centrali (RSSI: {rssi}).")
-        # Nie rób nic więcej
 
 # --- Funkcja zamykania systemu ---
 def shutdown_system(signum=None, frame=None):
@@ -279,6 +284,7 @@ def shutdown_system(signum=None, frame=None):
 
     log.warning(f"\nShutdown: Zamykanie systemu (Trigger: {trigger})...")
     send_notification(event_type="system_shutdown_initiated", trigger_method=trigger, user_id=None)
+    time.sleep(0.2)
 
     if radio_handler:
         log.info("Shutdown: Zamykanie radia...")
@@ -425,9 +431,14 @@ if __name__ == "__main__":
     log.info("="*30 + " Inicjalizacja Systemu Szlabanu " + "="*30)
     log.info(f"ID Szlabanu: {AppConfig.BARRIER_ID}")
     if AppConfig.CENTRAL_ENDPOINT_URL:
-        log.info(f"Endpoint centrali: {AppConfig.CENTRAL_ENDPOINT_URL}")
+        log.info(f"Endpoint powiadomień centrali: {AppConfig.CENTRAL_ENDPOINT_URL}")
     else:
-        log.warning("Wysyłanie powiadomień do centrali jest WYŁĄCZONE.")
+        log.warning("Wysyłanie powiadomień do centrali jest WYŁĄCZONE (CENTRAL_ENDPOINT_URL).")
+    if AppConfig.CENTRAL_VERIFY_URL:
+         log.info(f"Endpoint weryfikacji centrali: {AppConfig.CENTRAL_VERIFY_URL}")
+    else:
+         log.warning("Weryfikacja radiowa w centrali jest WYŁĄCZONA (CENTRAL_VERIFY_URL).")
+
 
     try:
         log.info("Inicjalizacja Barrier...")
