@@ -1,5 +1,5 @@
 Core/Src/app_template.o: ../Core/Src/app_template.c \
- D:/MGR/BEKO_PROJEKT/Projekt/Radio/board.h \
+ ../Core/Inc/app_template.h D:/MGR/BEKO_PROJEKT/Projekt/Radio/board.h \
  ../Drivers/CMSIS/Device/ST/STM32U5xx/Include/stm32u5xx.h \
  ../Drivers/CMSIS/Device/ST/STM32U5xx/Include/stm32u545xx.h \
  ../Drivers/CMSIS/Include/core_cm33.h \
@@ -23,6 +23,8 @@ Core/Src/app_template.o: ../Core/Src/app_template.c \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_crc_ex.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_flash.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_flash_ex.h \
+ ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_i2c.h \
+ ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_i2c_ex.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pwr.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pwr_ex.h \
  ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_rtc.h \
@@ -46,8 +48,8 @@ Core/Src/app_template.o: ../Core/Src/app_template.c \
  D:/MGR/BEKO_PROJEKT/Projekt/Radio/sx1276/sx1276Regs-LoRa.h \
  D:/MGR/BEKO_PROJEKT/Projekt/Radio/rtc-board.h \
  D:/MGR/BEKO_PROJEKT/Projekt/Radio/sx1276-board.h \
- D:/MGR/BEKO_PROJEKT/Projekt/Radio/radio.h ../Core/Inc/app_template.h \
- ../Core/Inc/config.h ../Core/Inc/main.h ../Core/Inc/crypto_utils.h \
+ D:/MGR/BEKO_PROJEKT/Projekt/Radio/radio.h ../Core/Inc/config.h \
+ ../Core/Inc/main.h ../Core/Inc/crypto_utils.h \
  C:/Users/julek/Desktop/STM32CubeExpansion_Crypto_V4.4.0/Middlewares/ST/STM32_Cryptographic/include/cmox_crypto.h \
  C:/Users/julek/Desktop/STM32CubeExpansion_Crypto_V4.4.0/Middlewares/ST/STM32_Cryptographic/include/hash/cmox_sha1.h \
  C:/Users/julek/Desktop/STM32CubeExpansion_Crypto_V4.4.0/Middlewares/ST/STM32_Cryptographic/include/hash/cmox_hash.h \
@@ -107,7 +109,8 @@ Core/Src/app_template.o: ../Core/Src/app_template.c \
  C:/Users/julek/Desktop/STM32CubeExpansion_Crypto_V4.4.0/Middlewares/ST/STM32_Cryptographic/include/utils/cmox_utils_compare.h \
  C:/Users/julek/Desktop/STM32CubeExpansion_Crypto_V4.4.0/Middlewares/ST/STM32_Cryptographic/include/cmox_info.h \
  C:/Users/julek/Desktop/STM32CubeExpansion_Crypto_V4.4.0/Middlewares/ST/STM32_Cryptographic/include/cmox_init.h \
- ../Core/Inc/config.h
+ ../Core/Inc/config.h ../Core/Inc/memory.h
+../Core/Inc/app_template.h:
 D:/MGR/BEKO_PROJEKT/Projekt/Radio/board.h:
 ../Drivers/CMSIS/Device/ST/STM32U5xx/Include/stm32u5xx.h:
 ../Drivers/CMSIS/Device/ST/STM32U5xx/Include/stm32u545xx.h:
@@ -132,6 +135,8 @@ D:/MGR/BEKO_PROJEKT/Projekt/Radio/board.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_crc_ex.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_flash.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_flash_ex.h:
+../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_i2c.h:
+../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_i2c_ex.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pwr.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_pwr_ex.h:
 ../Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal_rtc.h:
@@ -156,7 +161,6 @@ D:/MGR/BEKO_PROJEKT/Projekt/Radio/sx1276/sx1276Regs-LoRa.h:
 D:/MGR/BEKO_PROJEKT/Projekt/Radio/rtc-board.h:
 D:/MGR/BEKO_PROJEKT/Projekt/Radio/sx1276-board.h:
 D:/MGR/BEKO_PROJEKT/Projekt/Radio/radio.h:
-../Core/Inc/app_template.h:
 ../Core/Inc/config.h:
 ../Core/Inc/main.h:
 ../Core/Inc/crypto_utils.h:
@@ -220,3 +224,4 @@ C:/Users/julek/Desktop/STM32CubeExpansion_Crypto_V4.4.0/Middlewares/ST/STM32_Cry
 C:/Users/julek/Desktop/STM32CubeExpansion_Crypto_V4.4.0/Middlewares/ST/STM32_Cryptographic/include/cmox_info.h:
 C:/Users/julek/Desktop/STM32CubeExpansion_Crypto_V4.4.0/Middlewares/ST/STM32_Cryptographic/include/cmox_init.h:
 ../Core/Inc/config.h:
+../Core/Inc/memory.h:

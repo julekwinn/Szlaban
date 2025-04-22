@@ -1,0 +1,6 @@
+../Core/Src/memory.c:7:13:IsEepromReady	1
+../Core/Src/memory.c:12:6:Memory_Init	2
+../Core/Src/memory.c:24:6:Memory_ReadCounter	2
+../Core/Src/memory.c:46:6:Memory_WriteCounter	3
+../Core/Src/memory.c:78:6:Memory_ReadInitFlag	2
+../Core/Src/memory.c:98:6:Memory_WriteInitFlag	3

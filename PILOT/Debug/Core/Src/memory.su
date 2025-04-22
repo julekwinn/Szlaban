@@ -1,0 +1,6 @@
+../Core/Src/memory.c:7:13:IsEepromReady	16	static
+../Core/Src/memory.c:12:6:Memory_Init	8	static
+../Core/Src/memory.c:24:6:Memory_ReadCounter	64	static
+../Core/Src/memory.c:46:6:Memory_WriteCounter	64	static
+../Core/Src/memory.c:78:6:Memory_ReadInitFlag	40	static
+../Core/Src/memory.c:98:6:Memory_WriteInitFlag	40	static

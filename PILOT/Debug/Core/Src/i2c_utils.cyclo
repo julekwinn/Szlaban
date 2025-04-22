@@ -1,0 +1,2 @@
+../Core/Src/i2c_utils.c:16:9:I2C_Scan	5
+../Core/Src/i2c_utils.c:58:6:I2C_PrintDeviceMap	4

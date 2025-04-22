@@ -4,11 +4,11 @@
 #ifndef INC_APP_TEMPLATE_H_
 #define INC_APP_TEMPLATE_H_
 
-#include <stdbool.h> // Dodaj, jeśli nie ma
+#include <stdbool.h>
 
 void app_main(void);
 
-// Dodaj deklarację nowej funkcji
+
 /**
  * @brief Sends a single radio message and waits for completion or timeout.
  * * @param message The null-terminated string to send.
@@ -21,4 +21,4 @@ void rx_loop(void);
 void tx_loop(void);
 
 
-#endif /* INC_APP_TEMPLATE_H_ */
+#endif

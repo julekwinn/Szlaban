@@ -4,9 +4,8 @@
 #include <stddef.h>
 #include <string.h>
 #include "cmox_crypto.h" // Główny plik nagłówkowy biblioteki kryptograficznej
-#include "config.h" // Dodane odwołanie do pliku konfiguracyjnego
+#include "config.h"
 
-/* Funkcje demonstracyjne */
 void text_hashing_example(void);
 void text_aes_encode(void);
 void text_aes_decode_example(void);

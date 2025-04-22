@@ -5,10 +5,113 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfa3a9c5-28ee-4796-b3a4-11fb3a09990f" name="Changes" comment="Dodanie funkcjonalnosci pilotow">
-      <change beforePath="$PROJECT_DIR$/.idea/API_CENTRALA.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/API_CENTRALA.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/central_server_fastapi.py" beforeDir="false" afterPath="$PROJECT_DIR$/central_server_fastapi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eszp.db" beforeDir="false" afterPath="$PROJECT_DIR$/eszp.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/.mxproject" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/.mxproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Core/Inc/app_template.h" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Core/Inc/app_template.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Core/Inc/crypto_utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Core/Inc/crypto_utils.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Core/Inc/stm32u5xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Core/Inc/stm32u5xx_hal_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Core/Src/app_template.c" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Core/Src/app_template.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Core/Src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Core/Src/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Core/Src/stm32u5xx_hal_msp.c" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Core/Src/stm32u5xx_hal_msp.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/app_template.cyclo" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/app_template.cyclo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/app_template.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/app_template.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/app_template.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/app_template.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/app_template.su" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/app_template.su" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/cmox_low_level.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/cmox_low_level.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/cmox_low_level.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/cmox_low_level.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/config.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/config.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/config.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/config.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/crypto_utils.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/crypto_utils.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/crypto_utils.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/crypto_utils.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/main.cyclo" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/main.cyclo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/main.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/main.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/main.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/main.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/main.su" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/main.su" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/stm32u5xx_hal_msp.cyclo" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/stm32u5xx_hal_msp.cyclo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/stm32u5xx_hal_msp.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/stm32u5xx_hal_msp.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/stm32u5xx_hal_msp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/stm32u5xx_hal_msp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/stm32u5xx_hal_msp.su" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/stm32u5xx_hal_msp.su" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/stm32u5xx_it.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/stm32u5xx_it.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/stm32u5xx_it.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/stm32u5xx_it.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/subdir.mk" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/subdir.mk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/system_stm32u5xx.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/system_stm32u5xx.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/system_stm32u5xx.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Core/Src/system_stm32u5xx.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_crc.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_crc.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_crc.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_crc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_crc_ex.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_crc_ex.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_crc_ex.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_crc_ex.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_exti.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_exti.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_exti.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_exti.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_flash.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_flash.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_flash.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_flash.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_flash_ex.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_flash_ex.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_flash_ex.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_flash_ex.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gtzc.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gtzc.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gtzc.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gtzc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_i2c.cyclo" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_i2c.cyclo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_i2c.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_i2c.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_i2c.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_i2c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_i2c.su" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_i2c.su" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_i2c_ex.cyclo" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_i2c_ex.cyclo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_i2c_ex.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_i2c_ex.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_i2c_ex.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_i2c_ex.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_i2c_ex.su" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_i2c_ex.su" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_icache.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_icache.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_icache.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_icache.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rtc.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rtc.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rtc.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rtc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rtc_ex.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rtc_ex.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rtc_ex.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rtc_ex.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_uart.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_uart.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_uart.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_uart.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_uart_ex.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_uart_ex.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_uart_ex.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_uart_ex.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Projekt.elf" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Projekt.elf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Projekt.list" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Projekt.list" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Projekt.map" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Projekt.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/board.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/board.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/board.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/board.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/delay.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/delay.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/delay.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/delay.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/gpio-board.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/gpio-board.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/gpio-board.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/gpio-board.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/gpio.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/gpio.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/gpio.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/gpio.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/rtc-board.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/rtc-board.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/rtc-board.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/rtc-board.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/spi-board.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/spi-board.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/spi-board.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/spi-board.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/sx1276-board.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/sx1276-board.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/sx1276-board.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/sx1276-board.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/sx1276/sx1276.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/sx1276/sx1276.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/sx1276/sx1276.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/sx1276/sx1276.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/timer.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/timer.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/timer.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/timer.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/utilities.d" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/utilities.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/Radio/utilities.o" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/Radio/utilities.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Debug/objects.list" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Debug/objects.list" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PILOT/Projekt.ioc" beforeDir="false" afterPath="$PROJECT_DIR$/../PILOT/Projekt.ioc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SZLABAN/VL53L0X-python" beforeDir="false" afterPath="$PROJECT_DIR$/../SZLABAN/VL53L0X-python" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,22 +154,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.deszyfrowanko.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;piloty&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.deszyfrowanko.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "piloty__v2",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\julek\Desktop\Szlaban\API_CENTRALA" />
@@ -92,6 +195,7 @@
       <workItem from="1744065119686" duration="6792000" />
       <workItem from="1745097497582" duration="13000" />
       <workItem from="1745264042701" duration="1952000" />
+      <workItem from="1745357053676" duration="19000" />
     </task>
     <task id="LOCAL-00001" summary="Dodanie funkcjonalnosci pilotow">
       <option name="closed" value="true" />
