@@ -611,8 +611,6 @@ async def root():
 # --- Uruchomienie Serwera (tylko dla deweloperki) ---
 if __name__ == "__main__":
     log.info("Uruchamianie serwera Uvicorn bezpośrednio (tylko dla celów deweloperskich)...")
-    # Użyj reload=True tylko podczas developmentu, aby automatycznie przeładowywać zmiany
-    # W środowisku produkcyjnym użyj Gunicorn lub innego serwera ASGI.
     uvicorn.run(
         "main:app",
         host=config.API_HOST, # Użyj konfiguracji hosta
