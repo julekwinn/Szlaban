@@ -1,6 +1,6 @@
 # Przewodnik Uruchomienia Systemu ESZP
 
-Cześć Natalia!
+Cześć!
 
 Oto instrukcja krok po kroku, jak uruchomić system Elektronicznego Szlabanu Zdalnie Programowalnego (ESZP) u siebie. System składa się z dwóch głównych części:
 
